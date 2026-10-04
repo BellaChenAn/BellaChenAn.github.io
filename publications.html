@@ -17,12 +17,32 @@
   <link href="images/favicon.PNG" rel="shortcut icon" type="image/x-icon">
   <link href="images/webclip.PNG" rel="apple-touch-icon">
   <meta name="robots" content="noindex">
+  <style>/* publications: two-column rows, stacked on small screens */
+    .pub-row { grid-template-rows: auto; grid-template-columns: 1fr 1fr; align-items: start; }
+    .pub-row img { display: block; width: 100%; height: auto; border-radius: 10px; }
+    @media screen and (max-width: 767px) { .pub-row { grid-template-columns: 1fr; } }
+    /* "Learn more" styled like the home page buttons */
+    .pub-btn.button-5 { display: inline-flex; align-items: center; margin-top: 8px; padding: 10px 24px; border: 1px solid #151515; border-radius: 999px; background: transparent; color: #151515; font-size: 14px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; line-height: 1.4; transition: background .2s, color .2s; }
+    .pub-btn.button-5:hover { background: #151515; color: #fff; }
+    /* same type as the home page: DM Sans, titles 24px bold, body 20px, meta 18px */
+    .wrap-licenses-info .heading-9, .wrap-licenses-info .heading-10, .wrap-licenses-info .paragraph-7, .text-block-5 { font-family: Dmsans, sans-serif; }
+    .wrap-licenses-info .heading-9 { margin: 0 0 10px; font-size: 24px; line-height: 32px; font-weight: 700; }
+    .wrap-licenses-info .heading-10 { margin: 0 0 14px; font-size: 18px; line-height: 1.5; font-weight: 400; color: #555; }
+    .wrap-licenses-info .heading-10 strong { color: #151515; }
+    .wrap-licenses-info .paragraph-7 { font-size: 20px; line-height: 1.6; color: #333; }
+    .text-block-5 { font-size: 20px; line-height: 1.6; }
+    @media screen and (max-width: 767px) {
+      .wrap-licenses-info .heading-9 { font-size: 20px; line-height: 28px; }
+      .wrap-licenses-info .heading-10 { font-size: 16px; }
+      .wrap-licenses-info .paragraph-7, .text-block-5 { font-size: 18px; }
+    }
+  </style>
 </head>
 <body>
   <div class="main-wrapper">
     <section class="section-header">
       <div class="back-to-home">
-        <a id="w-node-_5b783080-8702-f829-5956-04afd309e642-d309e642" data-w-id="5b783080-8702-f829-5956-04afd309e642" href="index.html" class="link-on-light w-inline-block">
+        <a id="w-node-_5b783080-8702-f829-5956-04afd309e642-d309e642" data-w-id="5b783080-8702-f829-5956-04afd309e642" href="/" class="link-on-light w-inline-block">
           <div id="w-node-_5b783080-8702-f829-5956-04afd309e643-d309e642" class="text-size-caps-tiny">Back to Home</div>
           <div class="underline-link dark-line-transparent">
             <div class="underline-on-hover dark-line"></div>
@@ -41,40 +61,76 @@
           </div>
         </section>
         <div class="wrap-licenses-info">
-          <div id="w-node-_4e9a0e94-ba3b-df20-2c89-70bbd15160e7-3760c85d" class="w-layout-layout quick-stack-5 wf-layout-layout">
-            <div class="w-layout-cell">
-              <div style="padding-top:56.17021276595745%" class="w-embed-youtubevideo"><iframe src="https://www.youtube.com/embed/fGc4fCFP5bQ?rel=0&amp;controls=1&amp;autoplay=0&amp;mute=0&amp;start=0" frameborder="0" style="position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:auto" allow="autoplay; encrypted-media" allowfullscreen="" title="Not a Playroom, but a Passage: Exploring the Design Space of a Technology-mediated Calm-down Corner"></iframe></div>
+          <div class="wrap-version-text">
+            <div class="w-layout-layout wf-layout-layout pub-row">
+              <div class="w-layout-cell"><img src="images/research/ludifocus-06.jpg" loading="lazy" alt="AttentionGo neurofeedback system in use"></div>
+              <div class="w-layout-cell">
+                <h1 class="heading-9"><strong>TITLE: From Training to Understanding Attention: Co-Designing Neurofeedback with Children with ADHD (Under Review, CHI &#x27;27)</strong></h1>
+                <h1 class="heading-10">Authors: <strong>Chen An Bella</strong> et al.</h1>
+                <p class="paragraph-7">A co-design study with 18 families of children with ADHD across 33 participatory design workshops, analyzed with reflexive thematic analysis, proposing seven child-centered design guidelines for future brain-computer interfaces.</p>
+              </div>
             </div>
-            <div class="w-layout-cell">
-              <h1 class="heading-9"><strong>TITLE: Not a Playroom, but a Passage: Exploring the Design Space of a Technology-mediated Calm-down Corner. (Accepted, <em>CHI &#x27;24</em> EA)</strong></h1>
-              <h1 class="heading-10">Authors: Gao J, Chen A, Yi Z, et al.</h1>
-              <p class="paragraph-7">Preschool educators play an important role in supporting children’s emotion regulation capacities in ways that promote their socio-emotional and behavioral health. However, tracking children’s emotional changes and giving timely intervention to every child in the class simultaneously is challenging for preschool educators. In this paper, we use the &quot;calm-down corner,&quot; which is widely used in classrooms with spaces where children can regain emotional control, as a probe to explore the design space of technology-supported preschool educators dealing with children’s emotional problems through one semi-structured interview with ten preschool educators and one co-design session with another 12 preschool educators. We summarized current challenges and the design considerations from preschool educators’ perspective, which could offer valuable insights for technology-enabled systems to facilitate the emotion regulation process for educators in the future.</p>
-            </div>
+            
+            <div class="div-block-2"></div>
           </div>
           <div class="wrap-version-text">
-            <a href="#" class="button-5 w-button">More</a>
+            <div class="w-layout-layout wf-layout-layout pub-row">
+              <div class="w-layout-cell"><img src="images/research/attentiongo-poster-photo.jpg" loading="lazy" alt="A child and the author playing with the AttentionGo tangible neurofeedback system"></div>
+              <div class="w-layout-cell">
+                <h1 class="heading-9"><strong>TITLE: AttentionGo: Designing Tangible Neurofeedback Tools for Children with ADHD through a Holistic Well-being Lens (DIS WIP &#x27;26)</strong></h1>
+                <h1 class="heading-10">Authors: <strong>Chen An Bella</strong>, James R. Wallace, Leah Zhang-Kennedy</h1>
+                <p class="paragraph-7">Neurofeedback training (NFT) has gained traction as a non-pharmacological intervention for children with ADHD, yet most existing systems are designed from a neurotypical perspective that neglects the well-being of neurodivergent users. To address this gap, this paper presents AttentionGo, a tangible neurofeedback system grounded in Self-Determination Theory (SDT), which informs its core design strategies.</p>
+              </div>
+            </div>
+            <a href="https://dl.acm.org/doi/pdf/10.1145/3802974.3809411" class="button-5 w-button pub-btn" target="_blank" rel="noopener">Learn more</a>
             <div class="div-block-2"></div>
-            <div id="w-node-_1e8c3f72-eb31-5cfb-18af-69db36e24aa3-3760c85d" class="w-layout-layout wf-layout-layout">
+          </div>
+          <div class="wrap-version-text">
+            <div class="w-layout-layout wf-layout-layout pub-row">
+              <div class="w-layout-cell"><img src="images/Folk.png" loading="lazy" alt="Participant comics about smart home IoT devices"></div>
+              <div class="w-layout-cell">
+                <h1 class="heading-9"><strong>TITLE: Folk Tales of IoT: Understanding the Impact of Stories on Users&#x27; Positive and Negative Perceptions of Smart Home IoT Devices (CHI &#x27;25)</strong></h1>
+                <h1 class="heading-10">Authors: Leah Zhang-Kennedy, Michaela Valiquette, <strong>Chen An Bella</strong> et al.</h1>
+                <p class="paragraph-7">This study examines how anecdotal stories from friends, peers, and online sources influence non-experts’ perceptions and behaviors toward smart home IoT devices. We surveyed 263 participants, collecting narratives that either positively or negatively influenced their perception of IoT devices, which they retold in text and comic formats to encourage deeper reflection. Thematic analysis of the narratives, combined with quantitative survey data, reveals that stories significantly impact trust and willingness to use and adopt IoT devices. Negative stories, particularly those concerning security, privacy, and device unreliability, reduced trust and usage, while positive stories about home safety through monitoring and improved quality of life increased interest in IoT devices. Perceptions of different IoT devices varied based on the themes associated with the stories. The findings highlight the powerful role of storytelling in driving consumer acceptance of technology.</p>
+              </div>
+            </div>
+            <a href="https://dl.acm.org/doi/pdf/10.1145/3706598.3713712" class="button-5 w-button pub-btn" target="_blank" rel="noopener">Learn more</a>
+            <div class="div-block-2"></div>
+          </div>
+          <div class="wrap-version-text">
+            <div class="w-layout-layout wf-layout-layout pub-row">
+              <div class="w-layout-cell"><img src="images/research/nao-robot.jpg" loading="lazy" alt="NAO humanoid robot next to its motion-programming interface"></div>
+              <div class="w-layout-cell">
+                <h1 class="heading-9"><strong>TITLE: Toward Safe Child-Robot Interactions: Exploring Children&#x27;s and Parents&#x27; Privacy Perceptions of Humanoid Social Robots (ICSR 2025)</strong></h1>
+                <h1 class="heading-10">Authors: JaeEun Jen Shin, Amr Hamdi, <strong>Chen An Bella</strong>, Yue Hu, Leah Zhang-Kennedy</h1>
+                <p class="paragraph-7">As humanoid social robots (HSRs) become more integrated into family environments, it is crucial to examine privacy concerns in child-robot interaction. This study examines how children and parents perceive privacy risks associated with HSRs, focusing on differences in their comfort levels across various usage scenarios. We conducted a user study with 38 parent-child dyads interacting with the HSR &quot;NAO&quot; using pre-programmed activities. Our findings revealed disparity in robot likability, smartness, and trustworthiness. These characteristics also influenced children&#x27;s willingness to share personal information (secrets). Parents and children showed significant differences in their comfort levels with sensor usage across different contextual scenarios, where parents expressed concerns about data collection, storage, and transfer, preferring supervised interactions.</p>
+              </div>
+            </div>
+            <a href="https://link.springer.com/chapter/10.1007/978-981-95-2398-6_18" class="button-5 w-button pub-btn" target="_blank" rel="noopener">Learn more</a>
+            <div class="div-block-2"></div>
+          </div>
+          <div class="wrap-version-text">
+            <div class="w-layout-layout wf-layout-layout pub-row">
+              <div class="w-layout-cell"><div style="padding-top:56.17021276595745%" class="w-embed-youtubevideo"><iframe src="https://www.youtube.com/embed/fGc4fCFP5bQ?rel=0&amp;controls=1&amp;autoplay=0&amp;mute=0&amp;start=0" frameborder="0" style="position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:auto" allow="autoplay; encrypted-media" allowfullscreen="" title="Not a Playroom, but a Passage: Exploring the Design Space of a Technology-mediated Calm-down Corner"></iframe></div></div>
+              <div class="w-layout-cell">
+                <h1 class="heading-9"><strong>TITLE: Not a Playroom, but a Passage: Exploring the Design Space of a Technology-Mediated Calm-Down Corner (CHI EA &#x27;24)</strong></h1>
+                <h1 class="heading-10">Authors: Gao J, <strong>Chen An Bella</strong>, Yi Z, et al.</h1>
+                <p class="paragraph-7">Preschool educators play an important role in supporting children’s emotion regulation capacities in ways that promote their socio-emotional and behavioral health. However, tracking children’s emotional changes and giving timely intervention to every child in the class simultaneously is challenging for preschool educators. In this paper, we use the &quot;calm-down corner,&quot; which is widely used in classrooms with spaces where children can regain emotional control, as a probe to explore the design space of technology-supported preschool educators dealing with children’s emotional problems through one semi-structured interview with ten preschool educators and one co-design session with another 12 preschool educators. We summarized current challenges and the design considerations from preschool educators’ perspective, which could offer valuable insights for technology-enabled systems to facilitate the emotion regulation process for educators in the future.</p>
+              </div>
+            </div>
+            <a href="https://dl.acm.org/doi/pdf/10.1145/3613905.3650832" class="button-5 w-button pub-btn" target="_blank" rel="noopener">Learn more</a>
+            <div class="div-block-2"></div>
+          </div>
+          <div class="wrap-version-text">
+            <div class="w-layout-layout wf-layout-layout pub-row">
               <div class="w-layout-cell"><img src="images/Screenshot-2025-01-03-at-12.48.46-AM.png" loading="lazy" sizes="(max-width: 991px) 100vw, (max-width: 1439px) 960px, 880px" srcset="images/Screenshot-2025-01-03-at-12.48.46-AM-p-500.png 500w, images/Screenshot-2025-01-03-at-12.48.46-AM-p-800.png 800w, images/Screenshot-2025-01-03-at-12.48.46-AM-p-1080.png 1080w, images/Screenshot-2025-01-03-at-12.48.46-AM.png 1166w" alt=""></div>
               <div class="w-layout-cell">
-                <h1 class="heading-9"><strong>TITLE: Exploring the Effects of Different BCI-based Attention Training Games on the Brain: A Functional Near-infrared Spectroscopy Study. [J]</strong></h1>
-                <h1 class="heading-10">Authors: <strong>An Chen, Song Hao, et.al</strong></h1>
+                <h1 class="heading-9"><strong>TITLE: Exploring the Effects of Different BCI-Based Attention Training Games on the Brain: A Functional Near-Infrared Spectroscopy Study (Neuroscience Letters, 2024)</strong></h1>
+                <h1 class="heading-10">Authors: <strong>Chen An Bella</strong>, Song Hao, et al.</h1>
                 <p class="paragraph-7">BCI games have been widely employed as non-invasive therapeutic interventions for conditions, but their efficacy remains a subject of debate. This study explores the efficacy of two prevalent forms of Brain-Computer Interface (BCI)-based attention training games: video games (VG) and physical games (PG). The effectiveness of these games has been examined through the lens of neuroscience, using functional Near-Infrared Spectroscopy (fNIRS) to monitor cortical activation. After the fNIRS test, subjects completed an Intrinsic Motivation Inventory (IMI) questionnaire. PG tasks activated six channels (L-PFC, R-PFC and R-TL), while VG tasks activated only one (R-PFC). Furthermore, females exhibited stronger activation during PG tasks, while males had none in either. Our findings suggest that under equivalent game rules and themes, PG may prove more effective for cognitive rehabilitation than VG, with stronger intrinsic motivation. We also found this result may exhibit gender differences. Finally, this research offers valuable insights for the future design of BCI-based games from a neuroscience perspective.</p>
               </div>
             </div>
-            <a href="#" class="button-5 w-button">More</a>
-            <div class="div-block-2"></div>
-          </div>
-          <div class="wrap-version-text">
-            <div id="w-node-a9e32780-de8d-39be-4186-1049e134388c-3760c85d" class="w-layout-layout wf-layout-layout">
-              <div class="w-layout-cell"><img src="images/Folk.png" loading="lazy" alt=""></div>
-              <div class="w-layout-cell">
-                <h1 class="heading-9"><strong>TITLE: Folk Tales of IoT: Understanding the Impact of Stories on Users&#x27; Positive and Negative Perceptions of Smart Home IoT Devices (Accepted 25 CHI)</strong></h1>
-                <h1 class="heading-10">Authors: Leah Zhang-Kennedy<strong>, Michaela Valiquette, Bella Chen et.al</strong></h1>
-                <p class="paragraph-7">2025CHI full paper<br><br>This study examines how anecdotal stories from friends, peers, and online sources influence non-experts’ perceptions and behaviors toward smart home IoT devices. We surveyed 263 participants, col- lecting narratives that either positively or negatively influenced their perception of IoT devices, which they retold in text and comic formats to encourage deeper reflection. Thematic analysis of the narratives, combined with quantitative survey data, reveals that stories significantly impact trust and willingness to use and adopt IoT devices. Negative stories, particularly those concerning security, privacy, and device unreliability, reduced trust and usage, while positive stories about home safety through monitoring and im- proved quality of life increased interest in IoT devices. Perceptions of different IoT devices varied based on the themes associated with the stories. The findings highlight the powerful role of storytelling in driving consumer acceptance of technology.</p>
-              </div>
-            </div>
-            <a href="#" class="button-5 w-button">More</a>
+            <a href="https://www.sciencedirect.com/science/article/pii/S0304394023005268" class="button-5 w-button pub-btn" target="_blank" rel="noopener">Learn more</a>
             <div class="div-block-2"></div>
           </div>
         </div>
@@ -96,27 +152,19 @@
                   <div class="text-size-tiny text-color-light">Bella Chen</div>
                 </a>
               </div>
-              <div class="margin-right-8px hide-478">
-                <div class="info-text-footer">
-                  <div class="text-size-tiny">Powered by </div>
-                </div>
-              </div>
-              <a href="https://webflow.com/" class="link-fading w-inline-block">
-                <div class="logo-webflow-light"><img loading="lazy" src="images/Logo-Webflow-Light.svg" alt="Webflow Logo"></div>
-              </a>
             </div>
             <div class="footer-link-right">
               <div class="margin-right-30px">
-                <a href="research.html" class="link-fading w-inline-block">
+                <a href="research" class="link-fading w-inline-block">
                   <div class="text-size-tiny text-color-light">Contact:</div>
                 </a>
               </div>
               <div class="margin-right-30px">
-                <a href="about.html" class="link-fading w-inline-block">
+                <a href="about" class="link-fading w-inline-block">
                   <div class="text-size-tiny text-color-light">chenanbella@gmail.com</div>
                 </a>
               </div>
-              <a href="publications.html" aria-current="page" class="link-fading w-inline-block w--current">
+              <a href="publications" aria-current="page" class="link-fading w-inline-block w--current">
                 <div class="text-size-tiny text-color-light">=)</div>
               </a>
             </div>

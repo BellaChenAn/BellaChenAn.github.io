@@ -18,12 +18,87 @@
   <link href="images/webclip.PNG" rel="apple-touch-icon">
   <meta name="robots" content="noindex">
 
+  <style>/* about: larger, wider Skills lists */
+    .hero-stack-9 .hero-wrapper-two-12 { max-width: 1200px; width: 100%; }
+    .hero-stack-9 .footer-dark { width: 100%; padding: 56px 48px 48px; }
+    .footer-dark .container-25, .footer-dark .footer-wrapper { max-width: 1200px; width: 100%; }
+    .footer-dark .footer-block { align-items: flex-start; text-align: left; }
+    .footer-dark .footer-content { width: 100%; grid-template-columns: repeat(3, minmax(0, 1fr)); grid-column-gap: 64px; grid-row-gap: 56px; }
+    .footer-dark .title-small { margin-bottom: 14px; font-size: 20px; line-height: 1.3; letter-spacing: .06em; }
+    .footer-dark .footer-link { margin: 10px 0 4px; padding-left: 0; padding-right: 0; font-size: 18px; line-height: 1.4; }
+    @media screen and (max-width: 991px) { .footer-dark .footer-content { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-column-gap: 40px; } }
+    @media screen and (max-width: 600px) { .footer-dark .footer-content { grid-template-columns: 1fr; } .footer-dark .title-small { font-size: 18px; } .footer-dark .footer-link { font-size: 17px; } }
+    .footer-dark .ab-skill .footer-link { display: flex; flex-direction: column; gap: 2px; margin: 10px 0 6px; }
+    .ab-skill-name { font-size: 18px; font-weight: 600; color: #151515; }
+    .ab-skill-tools { font-size: 15px; line-height: 1.45; color: #666; }
+  </style>
+  <style>/* about: photo collage hero and personal intro */
+    .ab-hero { padding: 24px 24px 40px; }
+    .ab-stage { position: relative; width: min(1200px, 100%); aspect-ratio: 1200 / 760; margin: 0 auto; }
+    .ab-photo { position: absolute; height: auto; border-radius: 10px; box-shadow: 0 8px 24px rgba(0, 0, 0, .12); object-fit: cover; opacity: 0; transform: translateY(16px); animation: ab-in .7s ease forwards; animation-delay: calc(var(--n) * 80ms); }
+    @keyframes ab-in { to { opacity: 1; transform: none; } }
+    .ab-name { position: absolute; left: 50%; top: 50%; margin: 0; transform: translate(-50%, -50%); font-size: clamp(48px, 7vw, 104px); text-align: center; white-space: nowrap; }
+    .ab-intro { width: min(1100px, calc(100% - 32px)); margin: 24px auto 80px; padding: 48px; border-radius: 20px; background: #fff; font-family: Dmsans, sans-serif; }
+    .ab-intro-title { margin: 0 0 28px; font-size: 32px; line-height: 1.25; color: #151515; }
+    .ab-intro-grid { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); gap: 48px; }
+    .ab-facts { margin: 0; }
+    .ab-facts div { padding: 12px 0; border-top: 1px solid #ececec; }
+    .ab-facts div:first-child { border-top: 0; padding-top: 0; }
+    .ab-facts dt { margin-bottom: 4px; font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: #8a8a8a; }
+    .ab-facts dd { margin: 0; font-size: 18px; line-height: 1.5; color: #151515; }
+    .ab-story p { margin: 0 0 16px; font-size: 20px; line-height: 1.6; color: #333; }
+    .ab-story p:last-child { margin-bottom: 0; }
+    @media screen and (max-width: 767px) {
+      .ab-stage { aspect-ratio: auto; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+      .ab-name { position: static; grid-column: 1 / -1; order: -1; transform: none; margin: 8px 0 16px; white-space: normal; }
+      .ab-photo { position: static; width: 100% !important; aspect-ratio: 1; }
+      .ab-intro { padding: 28px 20px; }
+      .ab-intro-grid { grid-template-columns: 1fr; gap: 28px; }
+      .ab-story p { font-size: 18px; }
+    }
+    @media (prefers-reduced-motion: reduce) { .ab-photo { animation: none; opacity: 1; transform: none; } }
+    /* gift-unwrapping reveal for the intro card */
+    .ab-intro { position: relative; overflow: hidden; }
+    .ab-wrap { position: absolute; inset: 0; z-index: 3; pointer-events: none; }
+    .ab-rib { position: absolute; background: repeating-linear-gradient(45deg, #b0ebb9 0 14px, #c6f1cc 14px 28px); transition: transform 1s cubic-bezier(.7, 0, .3, 1) .45s, opacity .4s ease 1.2s; }
+    .ab-rib-l, .ab-rib-r { top: calc(50% - 14px); height: 28px; width: 50%; }
+    .ab-rib-l { left: 0; } .ab-rib-r { right: 0; }
+    .ab-rib-t, .ab-rib-b { left: calc(50% - 14px); width: 28px; height: 50%; }
+    .ab-rib-t { top: 0; } .ab-rib-b { bottom: 0; }
+    .ab-bow { position: absolute; left: calc(50% - 60px); top: calc(50% - 40px); width: 120px; height: 70px; fill: #8fdc9c; stroke: #8fdc9c; transition: transform .5s cubic-bezier(.5, -0.4, .6, 1), opacity .35s ease .2s; }
+    /* content fades in slowly while the ribbons come off, one piece after another */
+    .ab-intro-title, .ab-facts > div, .ab-story p { transition: opacity 1.6s ease, transform 1.6s ease, filter 1.6s ease; }
+    .ab-js .ab-intro:not(.is-open) .ab-intro-title, .ab-js .ab-intro:not(.is-open) .ab-facts > div, .ab-js .ab-intro:not(.is-open) .ab-story p { opacity: 0; transform: translateY(10px); filter: blur(4px); }
+    .ab-intro.is-open .ab-intro-title { transition-delay: .6s; }
+    .ab-intro.is-open .ab-facts > div:nth-child(1), .ab-intro.is-open .ab-story p:nth-child(1) { transition-delay: .85s; }
+    .ab-intro.is-open .ab-facts > div:nth-child(2) { transition-delay: 1.05s; }
+    .ab-intro.is-open .ab-facts > div:nth-child(3), .ab-intro.is-open .ab-story p:nth-child(2) { transition-delay: 1.25s; }
+    .ab-intro.is-open .ab-facts > div:nth-child(4) { transition-delay: 1.45s; }
+    .ab-intro.is-open .ab-facts > div:nth-child(5), .ab-intro.is-open .ab-story p:nth-child(3) { transition-delay: 1.65s; }
+    .ab-intro.is-open .ab-bow { transform: scale(1.35) rotate(-12deg); opacity: 0; }
+    .ab-intro.is-open .ab-rib-l { transform: translateX(-105%) rotate(-4deg); }
+    .ab-intro.is-open .ab-rib-r { transform: translateX(105%) rotate(4deg); }
+    .ab-intro.is-open .ab-rib-t { transform: translateY(-105%) rotate(4deg); }
+    .ab-intro.is-open .ab-rib-b { transform: translateY(105%) rotate(-4deg); }
+    .ab-intro.is-open .ab-rib { opacity: 0; }
+    @media (prefers-reduced-motion: reduce) { .ab-wrap { display: none; } .ab-intro * { transition: none !important; opacity: 1 !important; transform: none !important; filter: none !important; } .ab-corner { transform: none !important; transition: none; } }
+    .ab-corner { position: absolute; width: 56px; height: 56px; border: 0 solid #8fdc9c; pointer-events: none; transform: scale(0); transition: transform .6s cubic-bezier(.2, .8, .2, 1.3) 1.3s; }
+    .ab-corner.c1 { top: 14px; left: 14px; border-top-width: 3px; border-left-width: 3px; border-top-left-radius: 8px; transform-origin: top left; }
+    .ab-corner.c2 { top: 14px; right: 14px; border-top-width: 3px; border-right-width: 3px; border-top-right-radius: 8px; transform-origin: top right; }
+    .ab-corner.c3 { bottom: 14px; right: 14px; border-bottom-width: 3px; border-right-width: 3px; border-bottom-right-radius: 8px; transform-origin: bottom right; }
+    .ab-corner.c4 { bottom: 14px; left: 14px; border-bottom-width: 3px; border-left-width: 3px; border-bottom-left-radius: 8px; transform-origin: bottom left; }
+    .ab-intro.is-open .ab-corner { transform: scale(1); }
+    .ab-avatar { display: block; width: 132px; height: 132px; margin: 0 0 20px; border-radius: 50%; object-fit: cover; border: 4px solid #fff; box-shadow: 0 0 0 3px #b0ebb9, 0 8px 22px rgba(0, 0, 0, .12); }
+    .ab-avatar { transition: opacity 1.6s ease .4s, transform 1.6s ease .4s, filter 1.6s ease .4s; }
+    .ab-js .ab-intro:not(.is-open) .ab-avatar { opacity: 0; transform: scale(.9); filter: blur(4px); }
+    @media screen and (max-width: 767px) { .ab-avatar { width: 104px; height: 104px; } }
+  </style>
 </head>
 <body class="body">
   <div class="main-wrapper">
     <section class="section-header">
       <div class="back-to-home">
-        <a id="w-node-_5b783080-8702-f829-5956-04afd309e642-d309e642" data-w-id="5b783080-8702-f829-5956-04afd309e642" href="index.html" class="link-on-light w-inline-block">
+        <a id="w-node-_5b783080-8702-f829-5956-04afd309e642-d309e642" data-w-id="5b783080-8702-f829-5956-04afd309e642" href="/" class="link-on-light w-inline-block">
           <div id="w-node-_5b783080-8702-f829-5956-04afd309e643-d309e642" class="text-size-caps-tiny">Back to Home</div>
           <div class="underline-link dark-line-transparent">
             <div class="underline-on-hover dark-line"></div>
@@ -34,51 +109,48 @@
         <div class="logo-on-white">About Me</div>
       </div>
     </section>
-    <div class="walsh-background-darkgreen">
-      <div class="walsh-hero-wrapper">
-        <div class="w-layout-grid walsh-main-grid-4">
-          <div id="w-node-ca835cd5-dd19-b2d0-7c2f-43f2938269de-3760c85c" class="walsh-hero-frame-image-med"><img src="images/IMG_1848-copy.JPG" loading="lazy" sizes="(max-width: 479px) 75vw, 320px" srcset="images/IMG_1848-copy-p-500.jpg 500w, images/IMG_1848-copy-p-800.jpg 800w, images/IMG_1848-copy-p-1080.jpg 1080w, images/IMG_1848-copy-p-1600.jpg 1600w, images/IMG_1848-copy-p-2000.jpg 2000w, images/IMG_1848-copy-p-2600.jpg 2600w, images/IMG_1848-copy-p-3200.jpg 3200w, images/IMG_1848-copy.JPG 4342w" alt="" class="walsh-cover-image-2"></div>
-          <div id="w-node-ca835cd5-dd19-b2d0-7c2f-43f2938269e0-3760c85c" class="walsh-hero-frame-image"><img src="images/IMG_0712-copy.JPG" loading="lazy" sizes="(max-width: 479px) 128px, 256px" srcset="images/IMG_0712-copy-p-500.jpg 500w, images/IMG_0712-copy-p-800.jpg 800w, images/IMG_0712-copy-p-1080.jpg 1080w, images/IMG_0712-copy-p-1600.jpg 1600w, images/IMG_0712-copy-p-2000.jpg 2000w, images/IMG_0712-copy-p-2600.jpg 2600w, images/IMG_0712-copy-p-3200.jpg 3200w, images/IMG_0712-copy.JPG 4019w" alt="" class="walsh-cover-image-2"></div>
-          <div id="w-node-ca835cd5-dd19-b2d0-7c2f-43f2938269e2-3760c85c" class="walsh-hero-frame-image-med"><img src="images/IMG_0746-copy.JPG" loading="lazy" sizes="(max-width: 479px) 75vw, 320px" srcset="images/IMG_0746-copy-p-500.jpg 500w, images/IMG_0746-copy-p-800.jpg 800w, images/IMG_0746-copy-p-1080.jpg 1080w, images/IMG_0746-copy-p-1600.jpg 1600w, images/IMG_0746-copy-p-2000.jpg 2000w, images/IMG_0746-copy-p-2600.jpg 2600w, images/IMG_0746-copy-p-3200.jpg 3200w, images/IMG_0746-copy.JPG 4181w" alt="" class="walsh-cover-image-2"></div>
-          <div id="w-node-ca835cd5-dd19-b2d0-7c2f-43f2938269e4-3760c85c" class="walsh-hero-frame-image-med"><img src="images/IMG_1919-copy.JPG" loading="lazy" sizes="(max-width: 479px) 90vw, (max-width: 1439px) 384px, 320px" srcset="images/IMG_1919-copy-p-500.jpg 500w, images/IMG_1919-copy-p-800.jpg 800w, images/IMG_1919-copy-p-1080.jpg 1080w, images/IMG_1919-copy-p-1600.jpg 1600w, images/IMG_1919-copy-p-2000.jpg 2000w, images/IMG_1919-copy-p-2600.jpg 2600w, images/IMG_1919-copy.JPG 2756w" alt=""></div>
-          <div id="w-node-ca835cd5-dd19-b2d0-7c2f-43f2938269e6-3760c85c" class="walsh-hero-frame-image"><img src="images/IMG_0800-copy.JPG" loading="lazy" sizes="(max-width: 479px) 128px, 256px" srcset="images/IMG_0800-copy-p-500.jpg 500w, images/IMG_0800-copy-p-800.jpg 800w, images/IMG_0800-copy-p-1080.jpg 1080w, images/IMG_0800-copy-p-1600.jpg 1600w, images/IMG_0800-copy-p-2000.jpg 2000w, images/IMG_0800-copy.JPG 2245w" alt="" class="walsh-cover-image-2"></div>
-          <div id="w-node-ca835cd5-dd19-b2d0-7c2f-43f2938269e8-3760c85c" class="walsh-hero-center-wrapper">
-            <h3 class="walsh-heading-xlarge-white">Bella<br>‍<strong> </strong><span class="walsh-text-lightgreen"><strong class="walsh-text-burst">An</strong></span><strong> Chen</strong></h3>
-          </div>
+    <section class="ab-hero" aria-label="Photos">
+      <div class="ab-stage">
+        <img class="ab-photo" src="images/about/me-1.jpg" alt="Selfie with giant lit-up dumpling sculptures" style="left:2%;top:4%;width:20%;--n:0" loading="eager">
+        <img class="ab-photo" src="images/about/me-2.jpg" alt="Selfie pointing at the camera" style="left:26%;top:0%;width:13%;--n:1" loading="eager">
+        <img class="ab-photo" src="images/about/me-4.jpg" alt="Giving a presentation at a podium" style="left:43%;top:2%;width:22%;--n:2" loading="eager">
+        <img class="ab-photo" src="images/about/me-3.jpg" alt="Smiling in front of autumn trees" style="left:72%;top:3%;width:24%;--n:3" loading="eager">
+        <img class="ab-photo" src="images/about/me-5.jpg" alt="Next to a snowman wearing a traffic cone" style="left:2%;top:40%;width:22%;--n:4" loading="eager">
+        <img class="ab-photo" src="images/about/me-6.jpg" alt="Looking back over the shoulder" style="left:77%;top:36%;width:16%;--n:5" loading="eager">
+        <img class="ab-photo" src="images/about/me-7.jpg" alt="Orange cat looking down at the camera" style="left:6%;top:70%;width:13%;--n:6" loading="eager">
+        <img class="ab-photo" src="images/about/me-8.jpg" alt="Two cats playing with a scratching post" style="left:24%;top:68%;width:15%;--n:7" loading="eager">
+        <img class="ab-photo" src="images/about/me-9.jpg" alt="Grey cat and orange kitten lying together" style="left:60%;top:69%;width:15%;--n:8" loading="eager">
+        <img class="ab-photo" src="images/about/me-10.jpg" alt="Grey cat and orange kitten looking at the camera" style="left:80%;top:68%;width:15%;--n:9" loading="eager">
+        <h1 class="ab-name walsh-heading-xlarge-white">Bella<br><span class="walsh-text-lightgreen"><strong class="walsh-text-burst">An</strong></span><strong> Chen</strong></h1>
+      </div>
+    </section>
+    <section class="ab-intro" aria-labelledby="ab-intro-title">
+      <div class="ab-wrap" aria-hidden="true">
+        <span class="ab-rib ab-rib-l"></span><span class="ab-rib ab-rib-r"></span>
+        <span class="ab-rib ab-rib-t"></span><span class="ab-rib ab-rib-b"></span>
+        <svg class="ab-bow" viewBox="0 0 120 70"><path d="M60 35 C40 5 8 6 10 28 C12 48 40 44 60 35 Z"/><path d="M60 35 C80 5 112 6 110 28 C108 48 80 44 60 35 Z"/><path d="M60 35 L46 68 M60 35 L74 68" fill="none" stroke-width="9" stroke-linecap="round"/><circle cx="60" cy="35" r="9"/></svg>
+      </div>
+      <span class="ab-corner c1" aria-hidden="true"></span><span class="ab-corner c2" aria-hidden="true"></span><span class="ab-corner c3" aria-hidden="true"></span><span class="ab-corner c4" aria-hidden="true"></span>
+      <img class="ab-avatar" src="images/about/avatar.jpg" alt="Portrait of Bella Chen smiling outdoors among green trees">
+      <h2 class="ab-intro-title" id="ab-intro-title">Hi, I&#x27;m An (Bella) Chen</h2>
+      <div class="ab-intro-grid">
+        <dl class="ab-facts">
+          <div><dt>Pronouns</dt><dd>She/Her</dd></div>
+          <div><dt>Favorite movie</dt><dd>《Interstellar》</dd></div>
+          <div><dt>Family in Canada</dt><dd>Me and my two cats!!!!</dd></div>
+          <div><dt>Favorite activities</dt><dd>Drawing, crafts, reading, volleyball, swimming, and taekwondo</dd></div>
+          <div><dt>BTW</dt><dd>I won the city-level taekwondo championship in the 54 kg division in 2016!!</dd></div>
+        </dl>
+        <div class="ab-story">
+          <p>I started learning Chinese painting when I was eight. But because I kept getting ink all over my face (much to everyone&#x27;s despair), I switched to Western painting, and at 17 I went on to study it at a specialized art school. In high school, I realized I was more drawn to hands-on, practical work, so at 20 I chose industrial design for my bachelor&#x27;s degree. There I worked on many projects related to human-computer interaction; I just didn&#x27;t know yet that it was called HCI.</p>
+          <p>Luckily, in the summer of 2022 I received a summer internship offer from the AIR lab at Tsinghua University, where I learned HCI alongside a group of brilliant people. After that, I formally moved into HCI research, and I&#x27;ve been here ever since.</p>
+          <p>My research focuses on children with ADHD. It began when my younger brother was diagnosed with ADHD and I saw how expensive his neurofeedback training at the clinic was. I&#x27;m exploring how to make this kind of training more affordable and efficient, and how it can bring more well-being to children with ADHD.</p>
         </div>
       </div>
-    </div>
+    </section>
     <section class="hero-stack-8">
       <div class="hero-wrapper-two-11">
         <h1 class="heading-28">Education Background</h1>
-        <div data-w-id="cc97798b-3fe7-fd84-3625-63adf8ab326c" class="brix---accordion-item-wrapper-v5">
-          <div class="brix---accordion-big-number-wrapper">
-            <div class="brix---color-neutral-800">
-              <div class="brix---accordion-big-number">2017-<br>2020</div>
-            </div>
-            <div class="brix---accordion-content-wrapper-v2">
-              <div class="brix---accordion-header">
-                <div class="brix---color-neutral-800">
-                  <h3 class="brix---accordion-title">the attached secondary art school of luxun academy of Arts, China</h3>
-                </div>
-              </div>
-              <div style="height:0px;-webkit-transform:translate3d(null, 20px, 0) scale3d(0.96, 0.96, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(null, 20px, 0) scale3d(0.96, 0.96, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(null, 20px, 0) scale3d(0.96, 0.96, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(null, 20px, 0) scale3d(0.96, 0.96, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="brix---acordion-body">
-                <div class="brix---accordion-spacer"></div>
-                <div class="brix---paragraph-default">
-                  <div class="brix---color-neutral-600">
-                    <p class="brix---mg-bottom-0">Fine Arts</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="brix---accordion-right-side">
-            <div style="-webkit-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0deg) skew(0, 0);-moz-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0deg) skew(0, 0);-ms-transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0deg) skew(0, 0);transform:translate3d(0, 0, 0) scale3d(1, 1, 1) rotateX(0) rotateY(0) rotateZ(0deg) skew(0, 0)" class="brix---accordion-icon-wrapper">
-              <div class="brix---accordion-btn-vertical-line-v2"></div>
-              <div class="brix---accordion-btn-horizontal-line-v2"></div>
-            </div>
-          </div>
-        </div>
         <div data-w-id="39d9216c-811e-c660-eac2-91ad2f64a3ce" class="brix---accordion-item-wrapper-v5">
           <div class="brix---accordion-big-number-wrapper">
             <div class="brix---color-neutral-800">
@@ -164,6 +236,42 @@
             <div class="brix---tabs-content w-tab-content">
               <div data-w-tab="Tab 1" class="w-tab-pane w--tab-active">
                 <div class="w-layout-grid brix---grid-1-column-gap-row-2">
+                  <div class="brix---accordion-item-wrapper-v3-first ab-item">
+                    <div class="brix---accordion-content-wrapper-v2-2">
+                      <div class="brix---accordion-header-2">
+                        <div class="brix---color-neutral-801">
+                          <h3 class="brix---accordion-title-2">Teaching Assistant, University of Waterloo (2024-2026)</h3>
+                        </div>
+                      </div>
+                      <div style="height:0px;opacity:0;transform:translate3d(0, 20px, 0) scale3d(0.96, 0.96, 1)" class="brix---acordion-body-2">
+                        <div class="brix---accordion-spacer-2"></div>
+                        <div class="brix---color-neutral-802">
+                          <p class="brix---paragraph-default-2">Courses:<br>2026: GBDA 205 Quantitative Methods; GBDA 304 Marketing in the Digital World<br>2025: GBDA 318 Advanced User Experience Design and Research; CS449/649 Human-Computer Interaction; GBDA 413 Special Topics in Design and Society<br>2024: CS115 Introduction to Computer Science; CS349 User Interface</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="brix---accordion-right-side-2">
+                      <a href="#" class="brix---btn-circle-accordion-btn w-inline-block"><img alt="" src="images/chevron-right-icon-elements-brix-templates.svg" class="brix---accordion-arrow-icon"></a>
+                    </div>
+                  </div>
+                  <div class="brix---accordion-item-wrapper-v3-first ab-item">
+                    <div class="brix---accordion-content-wrapper-v2-2">
+                      <div class="brix---accordion-header-2">
+                        <div class="brix---color-neutral-801">
+                          <h3 class="brix---accordion-title-2">Conference Reviewer (2024-2026)</h3>
+                        </div>
+                      </div>
+                      <div style="height:0px;opacity:0;transform:translate3d(0, 20px, 0) scale3d(0.96, 0.96, 1)" class="brix---acordion-body-2">
+                        <div class="brix---accordion-spacer-2"></div>
+                        <div class="brix---color-neutral-802">
+                          <p class="brix---paragraph-default-2">Reviewer for computing conferences:<br>DIS &#x27;26 (ACM Designing Interactive Systems Conference)<br>SOUPS &#x27;25 and SOUPS &#x27;24 (Symposium on Usable Privacy and Security)</p>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="brix---accordion-right-side-2">
+                      <a href="#" class="brix---btn-circle-accordion-btn w-inline-block"><img alt="" src="images/chevron-right-icon-elements-brix-templates.svg" class="brix---accordion-arrow-icon"></a>
+                    </div>
+                  </div>
                   <div data-w-id="9a203e30-4885-31c0-a0c5-1fb10730a22d" class="brix---accordion-item-wrapper-v3-first">
                     <div class="brix---accordion-content-wrapper-v2-2">
                       <div class="brix---accordion-header-2">
@@ -225,80 +333,44 @@
               </div>
               <div data-w-tab="Tab 2" class="w-tab-pane">
                 <div class="w-layout-grid brix---grid-1-column-gap-row-2">
-                  <div data-w-id="9a203e30-4885-31c0-a0c5-1fb10730a267" class="brix---accordion-item-wrapper-v3-first">
+                  <div class="brix---accordion-item-wrapper-v3-first ab-item">
                     <div class="brix---accordion-content-wrapper-v2-2">
                       <div class="brix---accordion-header-2">
                         <div class="brix---color-neutral-801">
-                          <h3 class="brix---accordion-title-2">Art Teacher, Bolunyang Arts Studio (2018-2019) </h3>
+                          <h3 class="brix---accordion-title-2">UX Intern, <a href="https://www.lumosglasses.com" class="link-10" target="_blank" rel="noopener">Lumos Health Inc.</a> (2026.7-2026.11)</h3>
                         </div>
                       </div>
-                      <div style="height:0px;-webkit-transform:translate3d(null, 20px, 0) scale3d(0.96, 0.96, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(null, 20px, 0) scale3d(0.96, 0.96, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(null, 20px, 0) scale3d(0.96, 0.96, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(null, 20px, 0) scale3d(0.96, 0.96, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="brix---acordion-body-2">
+                      <div style="height:0px;opacity:0;transform:translate3d(0, 20px, 0) scale3d(0.96, 0.96, 1)" class="brix---acordion-body-2">
                         <div class="brix---accordion-spacer-2"></div>
                         <div class="brix---color-neutral-802">
-                          <p class="brix---paragraph-default-2">Main Responsibilities: <br>1. Assist the main course instructor in conducting creative painting classes for children aged 8-10.<br>2. Designing promotional advertisement content.</p>
+                          <p class="brix---paragraph-default-2">Project: Enhancing User Experience and Human-Centred Design for Lumos Smart Light Therapy Glasses</p>
                         </div>
                       </div>
                     </div>
                     <div class="brix---accordion-right-side-2">
-                      <a href="#" class="brix---btn-circle-accordion-btn w-inline-block"><img alt="Icon - Elements Webflow Library - BRIX Templates" src="images/chevron-right-icon-elements-brix-templates.svg" class="brix---accordion-arrow-icon"></a>
-                    </div>
-                  </div>
-                  <div data-w-id="9a203e30-4885-31c0-a0c5-1fb10730a275" class="brix---accordion-item-wrapper-v3-first">
-                    <div class="brix---accordion-content-wrapper-v2-2">
-                      <div class="brix---accordion-header-2">
-                        <div class="brix---color-neutral-801">
-                          <h3 class="brix---accordion-title-2">Product Design Intern,<a href="http://www.oudasi.com" class="link-10">Oudasi</a>(2021.1-2021.3) </h3>
-                        </div>
-                      </div>
-                      <div style="height:0px;-webkit-transform:translate3d(null, 20px, 0) scale3d(0.96, 0.96, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(null, 20px, 0) scale3d(0.96, 0.96, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(null, 20px, 0) scale3d(0.96, 0.96, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(null, 20px, 0) scale3d(0.96, 0.96, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="brix---acordion-body-2">
-                        <div class="brix---accordion-spacer-2"></div>
-                        <div class="brix---color-neutral-802">
-                          <p class="brix---paragraph-default-2">Main Responsibilities:<br>1. As the team leader of the internship group, conducted a three-month innovative design project for bathroom products.</p>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="brix---accordion-right-side-2">
-                      <a href="#" class="brix---btn-circle-accordion-btn w-inline-block"><img alt="Icon - Elements Webflow Library - BRIX Templates" src="images/chevron-right-icon-elements-brix-templates.svg" class="brix---accordion-arrow-icon"></a>
+                      <a href="#" class="brix---btn-circle-accordion-btn w-inline-block"><img alt="" src="images/chevron-right-icon-elements-brix-templates.svg" class="brix---accordion-arrow-icon"></a>
                     </div>
                   </div>
                 </div>
               </div>
               <div data-w-tab="Tab 3" class="w-tab-pane">
                 <div class="w-layout-grid brix---grid-1-column-gap-row-2">
-                  <div data-w-id="9a203e30-4885-31c0-a0c5-1fb10730a2a1" class="brix---accordion-item-wrapper-v3-first">
+                  <div class="brix---accordion-item-wrapper-v3-first ab-item">
                     <div class="brix---accordion-content-wrapper-v2-2">
                       <div class="brix---accordion-header-2">
                         <div class="brix---color-neutral-801">
-                          <h3 class="brix---accordion-title-2">Luban Art Studio, 2020-2022</h3>
+                          <h3 class="brix---accordion-title-2">CEO &amp; Founder, <a href="https://ludifocus.com" class="link-10" target="_blank" rel="noopener">LudiFocus Inc.</a>, Canada</h3>
                         </div>
                       </div>
-                      <div style="height:0px;-webkit-transform:translate3d(null, 20px, 0) scale3d(0.96, 0.96, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(null, 20px, 0) scale3d(0.96, 0.96, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(null, 20px, 0) scale3d(0.96, 0.96, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(null, 20px, 0) scale3d(0.96, 0.96, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="brix---acordion-body-2">
+                      <div style="height:0px;opacity:0;transform:translate3d(0, 20px, 0) scale3d(0.96, 0.96, 1)" class="brix---acordion-body-2">
                         <div class="brix---accordion-spacer-2"></div>
                         <div class="brix---color-neutral-802">
-                          <p class="brix---paragraph-default-2">Leveraging my extensive artistic resources and relationships, I established Luban Art Studio to sell handmade artworks online, including oil paintings, digital illustrations, crafts, and more.</p>
+                          <p class="brix---paragraph-default-2">Selected from 40+ PhD-level projects to receive Seed Funding at ARC&#x27;s Inaugural Pitch Day, and featured by the David R. Cheriton School of Computer Science. <a href="https://cs.uwaterloo.ca/news/attention-attention-bella-chen-wins-big-arc-pitch-day-2026" class="link-10" target="_blank" rel="noopener">Read the news story</a><br>Awards: Academy of Research Commercialization Scholarship ($10,000 CAD); Velocity Outstanding Validation Award ($500 CAD)</p>
                         </div>
                       </div>
                     </div>
                     <div class="brix---accordion-right-side-2">
-                      <a href="#" class="brix---btn-circle-accordion-btn w-inline-block"><img alt="Icon - Elements Webflow Library - BRIX Templates" src="images/chevron-right-icon-elements-brix-templates.svg" class="brix---accordion-arrow-icon"></a>
-                    </div>
-                  </div>
-                  <div id="w-node-b949619c-2494-c836-0b47-e177488e146a-3760c85c" data-w-id="b949619c-2494-c836-0b47-e177488e146a" class="brix---accordion-item-wrapper-v3-first">
-                    <div class="brix---accordion-content-wrapper-v2-2">
-                      <div class="brix---accordion-header-2">
-                        <div class="brix---color-neutral-801">
-                          <h3 class="brix---accordion-title-2">Tomorrow Studio, 2023-Now</h3>
-                        </div>
-                      </div>
-                      <div style="height:0px;-webkit-transform:translate3d(null, 20px, 0) scale3d(0.96, 0.96, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-moz-transform:translate3d(null, 20px, 0) scale3d(0.96, 0.96, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);-ms-transform:translate3d(null, 20px, 0) scale3d(0.96, 0.96, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);transform:translate3d(null, 20px, 0) scale3d(0.96, 0.96, 1) rotateX(0) rotateY(0) rotateZ(0) skew(0, 0);opacity:0" class="brix---acordion-body-2">
-                        <div class="brix---accordion-spacer-2"></div>
-                        <div class="brix---color-neutral-802">
-                          <p class="brix---paragraph-default-2"></p>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="brix---accordion-right-side-2">
-                      <a href="#" class="brix---btn-circle-accordion-btn w-inline-block"><img alt="Icon - Elements Webflow Library - BRIX Templates" src="images/chevron-right-icon-elements-brix-templates.svg" class="brix---accordion-arrow-icon"></a>
+                      <a href="#" class="brix---btn-circle-accordion-btn w-inline-block"><img alt="" src="images/chevron-right-icon-elements-brix-templates.svg" class="brix---accordion-arrow-icon"></a>
                     </div>
                   </div>
                 </div>
@@ -316,51 +388,52 @@
             <div class="container-25">
               <div class="footer-wrapper">
                 <div class="footer-content">
-                  <div id="w-node-_1d3b4237-c4a4-535c-165c-ea80e32db425-3760c85c" class="footer-block">
-                    <div class="title-small">3D Model Creating Skills</div>
-                    <a href="#" class="footer-link">Rhino+Keyshot</a>
-                    <a href="#" class="footer-link">C4D+Octane</a>
-                    <a href="#" class="footer-link">Croe</a>
-                    <a href="#" class="footer-link">Solidworks</a>
-                  </div>
-                  <div id="w-node-_1d3b4237-c4a4-535c-165c-ea80e32db42e-3760c85c" class="footer-block">
-                    <div class="title-small">Visual Design Skills</div>
-                    <a href="#" class="footer-link">Photoshop (PS)</a>
-                    <a href="#" class="footer-link">Adobe Illustrator (AI)</a>
-                    <a href="#" class="footer-link">Adobe XD</a>
-                    <a href="#" class="footer-link">Adobe InDesign</a>
-                    <a href="#" class="footer-link">Adobe Pr</a>
-                    <a href="#" class="footer-link">Adobe AE</a>
-                  </div>
-                  <div id="w-node-_1d3b4237-c4a4-535c-165c-ea80e32db439-3760c85c" class="footer-block">
-                    <div class="title-small">UI Design Skills</div>
-                    <a href="#" class="footer-link">Figma</a>
-                    <a href="#" class="footer-link">Adobe XD</a>
-                    <a href="#" class="footer-link">Photoshop (PS)</a>
-                    <a href="#" class="footer-link">Adobe Illustrator (AI)</a>
-                  </div>
-                  <div id="w-node-b3b84eeb-846a-afb1-ae87-e3c461287163-3760c85c" class="footer-block">
-                    <div class="title-small">Programming Language</div>
-                    <a href="#" class="footer-link">C</a>
-                    <a href="#" class="footer-link">Python</a>
-                    <a href="#" class="footer-link">C#</a>
-                    <a href="#" class="footer-link">JavaScript</a>
-                  </div>
-                  <div id="w-node-bdb97a2f-3bd8-87f2-d809-1ae3b2a3d457-3760c85c" class="footer-block">
-                    <div class="title-small">Developing skills</div>
-                    <a href="#" class="footer-link">Unity</a>
-                    <a href="#" class="footer-link">Arduino</a>
-                    <a href="#" class="footer-link">VScode</a>
-                    <a href="#" class="footer-link">Git</a>
-                  </div>
-                  <div id="w-node-_6785d816-968e-d73a-c0d3-5165179f0ca2-3760c85c" class="footer-block">
-                    <div class="title-small">Research skills</div>
-                    <a href="#" class="footer-link">Interview</a>
-                    <a href="#" class="footer-link">Co-design</a>
-                    <a href="#" class="footer-link">Analyze</a>
-                    <a href="#" class="footer-link">Academic Writing</a>
-                  </div>
-                </div>
+              <div class="footer-block ab-skill">
+                <div class="title-small">Design</div>
+                <div class="footer-link"><span class="ab-skill-name">Interaction Design</span><span class="ab-skill-tools">User flows and interaction logic · Screen-based, tangible, and immersive interactions · Interaction design for children</span></div>
+                <div class="footer-link"><span class="ab-skill-name">UI Design</span><span class="ab-skill-tools">Mobile, web, and VR interfaces · Components and design systems · Figma</span></div>
+                <div class="footer-link"><span class="ab-skill-name">Visual Design</span><span class="ab-skill-tools">Brand identity design (logo, visual identity system) · Layout and typography · Photoshop · Illustrator · InDesign</span></div>
+                <div class="footer-link"><span class="ab-skill-name">Animation Design</span><span class="ab-skill-tools">Motion graphics · Product animation · Video editing · After Effects · Cinema 4D · Premiere Pro</span></div>
+                <div class="footer-link"><span class="ab-skill-name">3D Modeling & Rendering</span><span class="ab-skill-tools">Product and industrial modeling (Rhino, Creo, SolidWorks) · Free-form and scene modeling (Blender) · Rendering (KeyShot, Octane Render)</span></div>
+                <div class="footer-link"><span class="ab-skill-name">VR Design</span><span class="ab-skill-tools">Immersive experience and spatial interaction design · VR game design (Brainer) · VR hardware design for children</span></div>
+              </div>
+              <div class="footer-block ab-skill">
+                <div class="title-small">Coding</div>
+                <div class="footer-link"><span class="ab-skill-name">Programming Languages</span><span class="ab-skill-tools">Python · C · C++ · C# · JavaScript · HTML/CSS · SQL</span></div>
+                <div class="footer-link"><span class="ab-skill-name">AI & Machine Learning</span><span class="ab-skill-tools">PyTorch · TensorFlow · OpenAI API · Claude API</span></div>
+                <div class="footer-link"><span class="ab-skill-name">VR Development</span><span class="ab-skill-tools">Unity3D · XR Interaction Toolkit · OpenXR · Meta Quest SDK</span></div>
+                <div class="footer-link"><span class="ab-skill-name">Web Development</span><span class="ab-skill-tools">Node.js · Three.js · WebSocket</span></div>
+                <div class="footer-link"><span class="ab-skill-name">Android Development</span><span class="ab-skill-tools">Android Studio · BLE</span></div>
+                <div class="footer-link"><span class="ab-skill-name">Physical Computing</span><span class="ab-skill-tools">Arduino · ESP32 · Raspberry Pi · 3D printing</span></div>
+              </div>
+              <div class="footer-block ab-skill">
+                <div class="title-small">Prototyping</div>
+                <div class="footer-link"><span class="ab-skill-name">Low-Fidelity Prototyping</span><span class="ab-skill-tools">Sketches · Paper and cardboard mock-ups · Wireframes · Storyboards</span></div>
+                <div class="footer-link"><span class="ab-skill-name">High-Fidelity Interactive Prototyping</span><span class="ab-skill-tools">Figma interactive prototypes · Clickable app and web flows · Micro-interactions and transitions</span></div>
+                <div class="footer-link"><span class="ab-skill-name">Code-Based Prototyping</span><span class="ab-skill-tools">VR interaction prototypes · 3D web prototypes · Functional Android app prototypes</span></div>
+                <div class="footer-link"><span class="ab-skill-name">Physical Prototyping</span><span class="ab-skill-tools">Model making (clay, paper, plastic) · Surface finishing · 3D-printed enclosures and form studies</span></div>
+                <div class="footer-link"><span class="ab-skill-name">Electronic & IoT Prototyping</span><span class="ab-skill-tools">Sensor and circuit prototyping · Connected device prototypes · Wizard-of-Oz prototypes</span></div>
+                <div class="footer-link"><span class="ab-skill-name">Prototype Evaluation & Iteration</span><span class="ab-skill-tools">Defining what each prototype should test · Pilot testing · Iterating across fidelity levels</span></div>
+              </div>
+              <div class="footer-block ab-skill">
+                <div class="title-small">Research</div>
+                <div class="footer-link"><span class="ab-skill-name">Qualitative Methods</span><span class="ab-skill-tools">Semi-structured interviews · Participatory design and co-design workshops · Open-ended surveys</span></div>
+                <div class="footer-link"><span class="ab-skill-name">Quantitative Methods</span><span class="ab-skill-tools">Questionnaires and surveys · Controlled experiments, e.g. a 40-participant fNIRS study · Statistical analysis</span></div>
+                <div class="footer-link"><span class="ab-skill-name">Evaluation</span><span class="ab-skill-tools">Usability testing · User Experience Questionnaire (UEQ) · User studies</span></div>
+                <div class="footer-link"><span class="ab-skill-name">Analysis and Synthesis</span><span class="ab-skill-tools">Reflexive thematic analysis · Open coding (Miro) · NVivo · Design guidelines and implications</span></div>
+                <div class="footer-link"><span class="ab-skill-name">Research through Design</span><span class="ab-skill-tools">Designing and deploying prototypes as research probes · e.g. AttentionGo, EMMO, the sound-to-marbling probe</span></div>
+              </div>
+              <div class="footer-block ab-skill">
+                <div class="title-small">Marketing</div>
+                <div class="footer-link"><span class="ab-skill-name">Customer Discovery and Validation</span><span class="ab-skill-tools">Interviews · Surveys · Questionnaires</span></div>
+                <div class="footer-link"><span class="ab-skill-name">Market Research</span><span class="ab-skill-tools">Market sizing · Competitive analysis</span></div>
+                <div class="footer-link"><span class="ab-skill-name">Business Model Design</span><span class="ab-skill-tools">Business Model Canvas · Pricing and revenue models</span></div>
+                <div class="footer-link"><span class="ab-skill-name">Brand Identity</span><span class="ab-skill-tools">CI (Corporate Identity) and VI (Visual Identity) design</span></div>
+                <div class="footer-link"><span class="ab-skill-name">Pitching</span><span class="ab-skill-tools">Business pitching</span></div>
+                <div class="footer-link"><span class="ab-skill-name">User Personas and Journey Mapping</span><span class="ab-skill-tools">Personas · User journey maps</span></div>
+                <div class="footer-link"><span class="ab-skill-name">TRIZ Analysis</span><span class="ab-skill-tools">TRIZ, the Theory of Inventive Problem Solving, a systematic method for resolving design contradictions and generating innovative solutions</span></div>
+              </div>
+            </div>
               </div>
             </div>
           </section>
@@ -369,8 +442,7 @@
           </section>
         </div>
       </section>
-      
-      <!-- Guide to Working with Me Section -->
+        <!-- Guide to Working with Me Section -->
       <section class="hero-stack-8">
         <div class="hero-wrapper-two-11">
           <h2 class="heading-20" style="color: #333;">Guide to Working with Me</h2>
@@ -459,12 +531,11 @@
           
         </div>
       </section>
-      
       <section>
         <div class="container-10">
           <div class="hero-wrapper-two-3">
             <h3 data-w-id="e59e703b-8812-36ef-70ff-8d02a0244de3" style="opacity:0" class="heading-19">Bella&#x27;s Gallery</h3>
-            <p data-w-id="e59e703b-8812-36ef-70ff-8d02a0244de5" style="opacity:0" class="paragraph-26"><br>Since middle school, I have been passionate about painting and have dreamed of becoming a designer from a young age. </p>
+            <p data-w-id="e59e703b-8812-36ef-70ff-8d02a0244de5" style="opacity:0" class="paragraph-26"><br>Since middle school, I have been passionate about painting and have dreamed of becoming a designer from a young age.</p>
           </div>
         </div>
         <section class="gallery-overview-2">
@@ -508,7 +579,6 @@
         </section>
       </section>
     </div>
-    
     <section class="section-footer-links section-dark">
       <div class="w-layout-blockcontainer container w-container">
         <div class="margin-bottom-20px">
@@ -525,27 +595,19 @@
                   <div class="text-size-tiny text-color-light">Bella Chen</div>
                 </a>
               </div>
-              <div class="margin-right-8px hide-478">
-                <div class="info-text-footer">
-                  <div class="text-size-tiny">Powered by </div>
-                </div>
-              </div>
-              <a href="https://webflow.com/" class="link-fading w-inline-block">
-                <div class="logo-webflow-light"><img loading="lazy" src="images/Logo-Webflow-Light.svg" alt="Webflow Logo"></div>
-              </a>
             </div>
             <div class="footer-link-right">
               <div class="margin-right-30px">
-                <a href="research.html" class="link-fading w-inline-block">
+                <a href="research" class="link-fading w-inline-block">
                   <div class="text-size-tiny text-color-light">Contact:</div>
                 </a>
               </div>
               <div class="margin-right-30px">
-                <a href="about.html" aria-current="page" class="link-fading w-inline-block w--current">
+                <a href="about" aria-current="page" class="link-fading w-inline-block w--current">
                   <div class="text-size-tiny text-color-light">chenanbella@gmail.com</div>
                 </a>
               </div>
-              <a href="publications.html" class="link-fading w-inline-block">
+              <a href="publications" class="link-fading w-inline-block">
                 <div class="text-size-tiny text-color-light">=)</div>
               </a>
             </div>
@@ -556,5 +618,33 @@
   </div>
   <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=675f8d2c372637ad3760c806" type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
   <script src="js/an-bellas-beautiful-site.js" type="text/javascript"></script>
+  <script>/* about: open/close for the newly added Work Experience items */
+    document.querySelectorAll('.ab-item').forEach(function (item) {
+      var body = item.querySelector('.brix---acordion-body-2'), icon = item.querySelector('.brix---accordion-arrow-icon'), open = false;
+      body.style.transition = 'height .4s ease, opacity .4s ease, transform .4s ease';
+      if (icon) icon.style.transition = 'transform .3s ease';
+      item.style.cursor = 'pointer';
+      item.addEventListener('click', function (e) {
+        if (e.target.closest('a[href]:not([href="#"])')) return;   // let real links work
+        e.preventDefault();
+        open = !open;
+        body.style.height = open ? body.scrollHeight + 'px' : '0px';
+        body.style.opacity = open ? '1' : '0';
+        body.style.transform = open ? 'none' : 'translate3d(0, 20px, 0) scale3d(0.96, 0.96, 1)';
+        if (icon) icon.style.transform = open ? 'rotate(90deg)' : 'none';
+      });
+    });
+  </script>
+  <script>/* about: unwrap the intro card when it scrolls into view */
+    (function () {
+      var card = document.querySelector('.ab-intro');
+      if (!card || !('IntersectionObserver' in window)) { if (card) card.classList.add('is-open'); return; }
+      document.documentElement.classList.add('ab-js');
+      var io = new IntersectionObserver(function (es) {
+        es.forEach(function (e) { if (e.isIntersecting) { setTimeout(function () { card.classList.add('is-open'); }, 250); io.disconnect(); } });
+      }, { threshold: 0.35 });
+      io.observe(card);
+    })();
+  </script>
 </body>
 </html>
